@@ -2,13 +2,9 @@ import { useAccount, useConnect, useDisconnect, useEnsAvatar, useEnsName } from 
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 
 import { chains } from '~/configs/setup-wallet';
-import { DEFAULT_CHAIN_ID } from '~/constants';
 
-export const useConnectWallet = (chainId: number = DEFAULT_CHAIN_ID) => {
+export const useConnectWallet = (chainId = 49088) => {
   const { address, isConnected } = useAccount();
-
-  const { data: ensAvatar } = useEnsAvatar({ address });
-  const { data: ensName } = useEnsName({ address });
 
   const { connect, error, isLoading } = useConnect({
     chainId,
@@ -25,7 +21,5 @@ export const useConnectWallet = (chainId: number = DEFAULT_CHAIN_ID) => {
     isConnectError: error,
 
     address,
-    ensAvatar,
-    ensName,
   };
 };

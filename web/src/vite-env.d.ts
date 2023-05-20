@@ -6,6 +6,10 @@ import { css as cssImport } from '@emotion/react';
 import { CSSInterpolation } from '@emotion/serialize';
 import styledImport from '@emotion/styled';
 
+interface Window {
+  ethereum: any
+}
+
 declare module 'twin.macro' {
   // The styled and css imports
   const styled: typeof styledImport;

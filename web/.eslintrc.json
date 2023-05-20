@@ -15,7 +15,7 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "./web/tsconfig.json"
   },
   "ignorePatterns": ["**.config.js", "**.config.ts"],
   "plugins": ["simple-import-sort"],

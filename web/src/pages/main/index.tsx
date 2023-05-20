@@ -1,7 +1,7 @@
 import tw from 'twin.macro';
 
 const MainPage = () => {
-  return <Wrapper></Wrapper>;
+  return <Wrapper>{'MainPage'}</Wrapper>;
 };
 
 const Wrapper = tw.div``;
