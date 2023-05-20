@@ -16,6 +16,7 @@ export const Header = () => {
       <LogoAndServiceName onClick={handleLogoClick}>
         <Logo src="../../../public/cocktail.png" alt="Logo" />
         <ServiceName>CocktailBar</ServiceName>
+        <Sponsor>x BIFROST</Sponsor>
       </LogoAndServiceName>
       { isConnected ?
         <WalletButton onClick={() => disconnect()} >Disconnect</WalletButton>
@@ -42,6 +43,10 @@ const Logo = tw.img`
 
 const ServiceName = tw.span`
   ml-2
+`;
+
+const Sponsor = tw.p`
+  text-xs ml-2 italic text-end text-black
 `;
 
 const WalletButton = tw.button`

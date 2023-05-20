@@ -41,6 +41,7 @@ export const TablePart = () => {
   
   return (
     <Wrapper>
+      <p>{"Powered by BiFi & Bifswap\n"}</p>
       <TableWrapper>
         <TableHeader>
           <TableHeaderCell>TICKER</TableHeaderCell>
