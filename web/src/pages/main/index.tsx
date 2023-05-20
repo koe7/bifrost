@@ -25,7 +25,19 @@ export const MainPage = () => {
         <Button onClick={handleGoClick}>Go</Button>
       </Box>
       <Box>
-        <Title>{"Satoshi's Hidden Portfolio"}</Title>
+        <Title>{"Layer2 Sector Portfolio"}</Title>
+        <DisabledButton disabled>Coming soon..</DisabledButton>
+      </Box>
+      <Box>
+        <Title>{"Infra Sector Portfolio"}</Title>
+        <DisabledButton disabled>Coming soon..</DisabledButton>
+      </Box>
+      <Box>
+        <Title>{"Memecoin Portfolio"}</Title>
+        <DisabledButton disabled>Coming soon..</DisabledButton>
+      </Box>
+      <Box>
+        <Title>{"Warren Buffett's Portfolio"}</Title>
         <DisabledButton disabled>Coming soon..</DisabledButton>
       </Box>
       <Box>
@@ -37,15 +49,14 @@ export const MainPage = () => {
 };
 
 const Wrapper = tw.div`
-  flex justify-start
-  w-full h-1/2 space-x-4
+  grid grid-cols-3 justify-center
+  w-full h-2/3
 `;
 
 const Box = tw.div`
-  flex flex-col items-center justify-center
-  w-1/4 h-1/4 p-12 m-12
+  flex flex-col justify-center
+  w-3/4 h-3/4 p-12 m-12
   bg-gray-200 rounded-md
-  h-full
 `;
 
 const Title = tw.h2`
