@@ -61,7 +61,7 @@ const PnL = tw.div`
 `;
 
 const Percentage = tw.div`
-  font-semibold text-lg text-green-500
+  font-semibold text-lg text-green-900
 `;
 
 const RightPart = tw.div``;

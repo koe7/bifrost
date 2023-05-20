@@ -14,15 +14,20 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <RouteWrapper>
+      <BrowserWrapper>
         <Header/>
-        <Routes>
-          <Route path="/" element={<PortfolioPage />} />
-        </Routes>
-        <Footer/>
-      </RouteWrapper>
+        <RouteWrapper>  
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/portfolio/0" element={<PortfolioPage />} />
+          </Routes>
+          <Footer/>
+        </RouteWrapper>
+      </BrowserWrapper>
     </BrowserRouter>
   );
 };
+
+const BrowserWrapper = tw.div``;
 
 export default App;

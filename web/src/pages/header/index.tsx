@@ -1,16 +1,26 @@
+import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import { useConnectWallet } from '../../hooks/data/use-connect-wallet';
 
 export const Header = () => {
-  const { connect, isConnectError: isError } = useConnectWallet();
+  const navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
+  const { connect, disconnect, isConnected, isConnectError: isError } = useConnectWallet();
   return (
     <Wrapper>
-      <LogoAndServiceName>
+      <LogoAndServiceName onClick={handleLogoClick}>
         <Logo src="../../../public/cocktail.png" alt="Logo" />
         <ServiceName>CocktailBar</ServiceName>
       </LogoAndServiceName>
-      <WalletButton onClick={() => connect()} >Connect Wallet</WalletButton>
+      { isConnected ?
+        <WalletButton onClick={() => disconnect()} >Disconnect</WalletButton>
+        : <WalletButton onClick={() => connect()} >Connect Wallet</WalletButton>
+    }
     </Wrapper>
   );
 };
