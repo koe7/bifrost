@@ -10,7 +10,7 @@ import { useConnectWallet } from '../../hooks/data/use-connect-wallet';
 export const ButtonPart = () => {
   const [depositValue, setDepositValue] = useState('');
   const [withdrawalValue, setWithdrawalValue] = useState('');
-  const [assets, setAssets] = useState('loading...');
+  const [assets, setAssets] = useState(0);
   const { connect, isConnectError: isError } = useConnectWallet();
   
   useEffect(() => {
@@ -21,8 +21,8 @@ export const ButtonPart = () => {
           const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
           const address = await provider.getSigner().getAddress();
 
-          const result = await contract.assets(address);
-          setAssets(result.toString());
+          const result = await contract.rewards(address);
+          setAssets(result);
         }
       } catch (error) {
         console.error('컨트랙트 함수 호출 오류:', error);

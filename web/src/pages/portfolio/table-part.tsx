@@ -1,13 +1,41 @@
+import { ethers } from 'ethers';
+import { useEffect, useState } from 'react';
 import tw from 'twin.macro';
 
+import { ABI,CONTRACT_ADDRESS } from '~/constants';
+
+import { useConnectWallet } from '../../hooks/data/use-connect-wallet';
+
 export const TablePart = () => {
+  const [assets, setAssets] = useState([0, 0, 0]);
+  const { connect, isConnectError: isError } = useConnectWallet();
+
+  useEffect(() => {
+    const fetchAssets = async () => {
+      try {
+        if (!isError && typeof window.ethereum !== 'undefined') {
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
+          const address = await provider.getSigner().getAddress();
+
+          const result = await contract.assets(address);
+          setAssets(result.map((item: ethers.BigNumber) => (item.div(ethers.BigNumber.from(1e6)).toNumber() / 1e12).toFixed(4)));
+        }
+      } catch (error) {
+        console.error('컨트랙트 함수 호출 오류:', error);
+      }
+    };
+
+    fetchAssets();
+  }, [isError]);
+
   const data = [
-    { ticker: 'BFC', amount: 100, value: 5000 },
-    { ticker: 'ETH', amount: 50, value: 10000 },
-    { ticker: 'BNB', amount: 200, value: 15000 },
-    { ticker: 'MATIC', amount: 150, value: 7500 },
-    { ticker: 'BTC', amount: 30, value: 30000 },
-  ];
+    { ticker: 'BFC', amount: assets[0], value: assets[0] * 0.1 },
+    { ticker: 'ETH', amount: assets[1], value: assets[1] * 2000 },
+    { ticker: 'BNB', amount: assets[2], value: assets[2] * 300 },
+    { ticker: 'MATIC', amount: 0, value: 0 },
+    { ticker: 'BTC', amount: 0, value: 0 },
+    ];
 
   const totalValue = data.reduce((acc, item) => acc + item.value, 0);
   
@@ -28,9 +56,9 @@ export const TablePart = () => {
               <TableData>{item.ticker}</TableData>
               <TableData>{item.amount}</TableData>
               <TableData>{item.value}</TableData>
-              <TableData>{`${((item.value / totalValue) * 100).toFixed(2)}%`}</TableData>
-              <TableData>20%</TableData>
-              <TableData>{`${((item.value / totalValue) * 100 - TARGET_SHARE).toFixed(2)}%`}</TableData>
+              <TableData>{totalValue == 0 ? '0' : `${((item.value / totalValue) * 100).toFixed(2)}%`}</TableData>
+              <TableData>{index > 2 ? "0%" : "33.33%"}</TableData>
+              <TableData>{totalValue == 0 ? '0' : `${((item.value / totalValue) * 100 - (index > 2 ? 0 : TARGET_SHARE)).toFixed(2)}%`}</TableData>
             </TableRow>
           ))}
         </TableBody>
@@ -80,6 +108,6 @@ const TableData = tw.div`
 
 const AdditionalWrapper = tw.div``;
 
-const TARGET_SHARE = 20; // Set your desired target share percentage here
+const TARGET_SHARE = 33;
 
 export default TablePart;
