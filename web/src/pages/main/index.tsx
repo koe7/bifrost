@@ -22,10 +22,10 @@ export const MainPage = () => {
             <InfoValue>+48.1%</InfoValue>
           </InfoWrapper>
         </Description>
-        <Button onClick={handleGoClick}>Go</Button>
+        <Button onClick={handleGoClick}>Taste it!</Button>
       </Box>
       <Box>
-        <Title>{"Layer2 Sector Portfolio"}</Title>
+        <Title>{"Layer2 Sector Investment"}</Title>
         <DisabledButton disabled>Coming soon..</DisabledButton>
       </Box>
       <Box>
